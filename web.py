@@ -2,6 +2,7 @@ import requests
 import json
 import os
 import ctypes
+import time
 
 def getWeather():
     baseUrl = 'http://api.openweathermap.org/data/2.5/weather?id=5393287&appid=96d97625d6f164e301becd048008122a&units=imperial'
@@ -60,6 +61,8 @@ def main():
         getImage(weather)
         # Set background image to photo
         ctypes.windll.user32.SystemParametersInfoW(20, 0, f'C:/SourceCode/python/wallpaper/images/{weather}.jpg', 0)
+
+        time.sleep(24.0 * 60.0 * 60.0)
 
 if __name__ == '__main__':
     main()
