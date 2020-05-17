@@ -3,6 +3,7 @@ import json
 import os
 import ctypes
 import time
+import glob
 
 def getWeather():
     baseUrl = 'http://api.openweathermap.org/data/2.5/weather?id=5393287&appid=96d97625d6f164e301becd048008122a&units=imperial'
@@ -50,11 +51,11 @@ def main():
     while True:
         # Check if image already exists in images folder
         # If image exists, delete it
-        dir = os.listdir('C:/SourceCode/python/wallpaper/images')
+        dir = glob.glob('C:/SourceCode/python/wallpaper/images')
         if not len(dir) == 0:
             for file in dir:
                 os.remove(file)
-
+                
         # Get description of weather
         weather = getWeather()
         # Get image of weather
