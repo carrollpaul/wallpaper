@@ -48,22 +48,19 @@ def getImage(weather):
     r = requests.get(downloadUrl)
 
 def main():
-    while True:
-        # Check if image already exists in images folder
-        # If image exists, delete it
-        dir = glob.glob('C:/SourceCode/python/wallpaper/images')
-        if not len(dir) == 0:
-            for file in dir:
-                os.remove(file)
-                
-        # Get description of weather
-        weather = getWeather()
-        # Get image of weather
-        getImage(weather)
-        # Set background image to photo
-        ctypes.windll.user32.SystemParametersInfoW(20, 0, f'C:/SourceCode/python/wallpaper/images/{weather}.jpg', 0)
-
-        time.sleep(24.0 * 60.0 * 60.0)
+    # Check if image already exists in images folder
+    # If image exists, delete it
+    # dir = glob.glob('C:/SourceCode/python/wallpaper/images')
+    # if not len(dir) == 0:
+        # for file in dir:
+            # os.remove(file)
+            
+    # Get description of weather
+    weather = getWeather()
+    # Get image of weather
+    getImage(weather)
+    # Set background image to photo
+    ctypes.windll.user32.SystemParametersInfoW(20, 0, f'C:/SourceCode/python/wallpaper/images/{weather}.jpg', 0)
 
 if __name__ == '__main__':
     main()
