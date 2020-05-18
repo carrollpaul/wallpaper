@@ -2,8 +2,7 @@ import requests
 import json
 import os
 import ctypes
-import time
-import glob
+import random
 
 def getWeather():
     baseUrl = 'http://api.openweathermap.org/data/2.5/weather?id=5393287&appid=96d97625d6f164e301becd048008122a&units=imperial'
@@ -28,15 +27,18 @@ def getImage(weather):
     params = {
         'query' : f'{weather}',
         'orientation' : 'landscape',
-        'per_page' : 1
+        'per_page' : 10
     }
     r = requests.get(baseUrl, headers=headers, params=params)
     text = r.json()
     
+    # Pick one of ten images at random
+    img = random.randint(0, 9)
+
     # Download URL is necessary to satisfy API requirements
     # Photo URL is where actual photo comes from
-    downloadUrl = text['results'][0]['links']['download']
-    photoUrl = text['results'][0]['urls']['full']
+    downloadUrl = text['results'][img]['links']['download']
+    photoUrl = text['results'][img]['urls']['full']
 
     # Get image, download it to images folder
     r = requests.get(photoUrl, stream=True)
