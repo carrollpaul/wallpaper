@@ -6,8 +6,15 @@ import random
 import config
 
 def getWeather():
-    baseUrl = 'http://api.openweathermap.org/data/2.5/weather?id=5393287&appid=96d97625d6f164e301becd048008122a&units=imperial'
-    r = requests.get(baseUrl)
+    baseUrl = 'http://api.openweathermap.org/data/2.5/weather'
+    
+    params = {
+        'id' : 5393287, # Santa Rosa, CA city ID
+        'appid' : config.weatherKey,
+        'units' : 'imperial'
+    }
+    
+    r = requests.get(baseUrl, params=params)
 
     # Check to see if request is good 
     if not r.status_code == 200:
