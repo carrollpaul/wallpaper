@@ -5,7 +5,7 @@ import ctypes
 import random
 import config
 
-def getWeather():
+def getWeather() -> None:
     baseUrl = 'http://api.openweathermap.org/data/2.5/weather'
     
     params = {
@@ -25,7 +25,7 @@ def getWeather():
     text = r.json()
     return text['weather'][0]['description']
 
-def getImage(weather):
+def getImage(weather: str) -> None:
     # Search unspash for image with description of current weather 
     baseUrl = 'https://api.unsplash.com/search/photos'
     headers = {
@@ -33,7 +33,7 @@ def getImage(weather):
         'Authorization': f'Client-ID {config.unsplashKey}'
     }
     params = {
-        'query' : f'{weather}',
+        'query' : weather,
         'orientation' : 'landscape',
         'per_page' : 10
     }
@@ -57,14 +57,7 @@ def getImage(weather):
     # Trigger download endpoint to satisfy API
     r = requests.get(downloadUrl)
 
-def main():
-    # Check if image already exists in images folder
-    # If image exists, delete it
-    # dir = glob.glob('C:/SourceCode/python/wallpaper/images')
-    # if not len(dir) == 0:
-        # for file in dir:
-            # os.remove(file)
-            
+def main() -> None: 
     # Get description of weather
     weather = getWeather()
     # Get image of weather
